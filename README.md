@@ -2,6 +2,6 @@
 
 ```bash
 podman build -f Dockerfile -t ddnet
-podman run -t ddnet ddnet
+podman run -it ddnet
 ```
 
