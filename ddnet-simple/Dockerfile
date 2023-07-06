@@ -21,5 +21,9 @@ RUN apk add sqlite-dev curl
 
 COPY --from=0 /ddnet/ddnet-src/build/DDNet-Server .
 
+RUN mkdir maps
+
+RUN wget -O "maps/Sunny Side Up.map" https://github.com/ddnet/ddnet-maps/raw/62f31034aef0e17050749fe615a652985ad91f10/types/novice/maps/Sunny%20Side%20Up.map
+
 CMD ["/ddnet/DDNet-Server"]
 
