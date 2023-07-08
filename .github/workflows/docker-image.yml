@@ -33,5 +33,7 @@ jobs:
         with:
           context: ddnet-simple
           push: true
-          tags: test-tag
+          tags: |
+            docker.io/chillerdragon/ddnet-simple:gh-latest
+            ghcr.io/chillerdragon/ddnet-simple:gh-latest
           labels: test-label
