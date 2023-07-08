@@ -28,10 +28,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Build and push Docker images
+      - name: Publish ddnet-simple
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          context: .
+          context: ddnet-simple
           push: true
           tags: test-tag
           labels: test-label
