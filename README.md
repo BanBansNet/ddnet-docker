@@ -1,4 +1,6 @@
-# Dockerfile for production ddnet servers
+# Dockerfiles for teeworlds and ddnet
+
+Production ready and testing images. Activley maintained for ddnet & teeworlds client and server.
 
 ## ddnet-simple
 
