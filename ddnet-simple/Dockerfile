@@ -1,10 +1,12 @@
 FROM alpine:3.18.2
 
+ARG DDNET_VERSION=17.0.3
+
 WORKDIR /ddnet
 
 RUN apk add cmake make g++ libpng-dev rust cargo sqlite-dev curl-dev python3
 
-RUN wget -O ddnet.zip https://github.com/ddnet/ddnet/archive/refs/tags/17.0.3.zip
+RUN wget -O ddnet.zip https://github.com/ddnet/ddnet/archive/refs/tags/$DDNET_VERSION.zip
 
 RUN unzip ddnet.zip
 RUN rm ddnet.zip
