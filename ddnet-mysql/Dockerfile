@@ -13,7 +13,7 @@ RUN rm ddnet.zip
 RUN mv * ddnet-src
 
 RUN mkdir ddnet-src/build
-RUN cd ddnet-src/build && cmake .. -DPREFER_BUNDLED_LIBS=ON -DCLIENT=OFF && make -j$(nproc)
+RUN cd ddnet-src/build && cmake .. -DPREFER_BUNDLED_LIBS=ON -DCLIENT=OFF -DMYSQL=ON && make -j$(nproc)
 
 FROM alpine:3.18.2
 
