@@ -24,8 +24,18 @@ jobs:
       - name: Getting image tag
         id: tag
         run: |
+          echo DDNETPP_TAG="$(grep 'ARG DDNETPP_VERSION=' ddnetpp/Dockerfile | cut -d'=' -f2)" >> $GITHUB_OUTPUT
           echo DDNET_SIMPLE_TAG="$(grep 'ARG DDNET_VERSION=' ddnet-simple/Dockerfile | cut -d'=' -f2)" >> $GITHUB_OUTPUT
           echo DDNET_MYSQL_TAG="$(grep 'ARG DDNET_VERSION=' ddnet-mysql/Dockerfile | cut -d'=' -f2)" >> $GITHUB_OUTPUT
+
+      - name: Publish ddnetpp
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: ddnetpp
+          push: true
+          tags: |
+            docker.io/chillerdragon/ddnetpp:${{ steps.tag.outputs.DDNETPP_TAG }}
+            docker.io/chillerdragon/ddnetpp:latest
 
       - name: Publish ddnet-simple
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
