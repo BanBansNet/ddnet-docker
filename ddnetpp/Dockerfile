@@ -1,4 +1,4 @@
-FROM ubuntu:23.04
+FROM ubuntu:24.04
 
 ARG DDNETPP_VERSION=v0.1.1
 
@@ -17,7 +17,7 @@ RUN mv * ddnetpp-src
 RUN mkdir ddnetpp-src/build
 RUN cd ddnetpp-src/build && cmake .. -DPREFER_BUNDLED_LIBS=ON -DCLIENT=OFF && make -j$(nproc)
 
-FROM ubuntu:23.04
+FROM ubuntu:24.04
 
 WORKDIR ddnetpp/
 
