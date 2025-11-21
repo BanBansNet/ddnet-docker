@@ -8,23 +8,19 @@ RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install pkg-config cmake ninja-build libsqlite3-dev build-essential git libssl-dev cargo rustc python3 -y
 RUN apt-get install wget unzip libcurl4-openssl-dev libpng-dev -y
 
-RUN wget -O ddnetpp.zip https://github.com/DDNetPP/DDNetPP/archive/refs/tags/$DDNETPP_VERSION.zip
-
-RUN unzip ddnetpp.zip
-RUN rm ddnetpp.zip
-RUN mv * ddnetpp-src
-
-RUN mkdir ddnetpp-src/build
-RUN cd ddnetpp-src/build && cmake .. -DPREFER_BUNDLED_LIBS=ON -DCLIENT=OFF && make -j$(nproc)
+RUN git clone --recursive https://github.com/DDNetPP/DDNetPP
+RUN cd DDNetPP && git checkout $DDNETPP_VERSION && git submodule update --init --recursive
+RUN mkdir /ddnetpp/DDNetPP/build
+RUN cd /ddnetpp/DDNetPP/build && cmake .. -DPREFER_BUNDLED_LIBS=ON -DCLIENT=OFF && make -j$(nproc)
 
 FROM ubuntu:24.04
 
-WORKDIR ddnetpp/
+WORKDIR /ddnetpp/
 
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install sqlite3 curl -y
 
-COPY --from=0 /ddnetpp/ddnetpp-src/build/DDNetPP .
+COPY --from=0 /ddnetpp/DDNetPP/build/DDNetPP .
 
 RUN echo 'sv_map BlmapChill' > autoexec.cfg
 
